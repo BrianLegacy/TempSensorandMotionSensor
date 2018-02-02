@@ -25,9 +25,9 @@ const int tempLED = 13;
 
 
 //declare all other variables
-float tempc; 
+float tempValue; 
 float vout;  
-int motion;
+int motionValue ;
 
 // the setup function runs once when you press reset or power the board
 void setup()
@@ -49,15 +49,15 @@ void setup()
 void loop()
 {
 	vout = analogRead(tempSensor);
-	motion = digitalRead(motionSensor);
-	tempc = (vout * 500) / 1023; // Storing value in Degree Celsius
+	motionValue = digitalRead(motionSensor);
+	tempValue = (vout * 500) / 1023; // Storing value in Degree Celsius
 
 	lcd.setCursor(0, 1);
-	lcd.print(tempc);
+	lcd.print(tempValue);
 	lcd.print(char(223));
 	lcd.print("C");
 
-	if (tempc>30)
+	if (tempValue>30)
 	{
 		digitalWrite(buzzer, HIGH);
 		digitalWrite(tempLED, HIGH);
@@ -66,11 +66,11 @@ void loop()
 		digitalWrite(tempLED, LOW);
 		delay(500);
 	}
-	if (motion != 0)
+	if (motionValue != 0)
 	{
 		digitalWrite(motionLED, HIGH);
 		digitalWrite(fan, HIGH);
-		if (motion != 0 && tempc>20)
+		if ( motionValue != 0 && tempValue>20)
 		{
 			digitalWrite(buzzer, HIGH);
 			//delay(100);
@@ -80,11 +80,11 @@ void loop()
 		delay(1500);
 		lcd.clear();
 	}
-	else if (motion == 0)
+	else if (motionValue == 0)
 	{
 		digitalWrite(motionLED, LOW);
 		digitalWrite(fan, LOW);
-		if (motion != 0 && tempc>20)
+		if (motionValue != 0 && tempValue>20)
 		{
 			digitalWrite(buzzer, LOW);
 
@@ -96,7 +96,7 @@ void loop()
 	}
 	/*Serial.print("in DegreeC=");
 	Serial.print("\t");
-	Serial.print(tempc);
+	Serial.print(tempValue);
 	Serial.println();
 	delay(1000);
 
