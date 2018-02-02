@@ -17,5 +17,9 @@
   <ItemGroup>
     <None Include="TempSensorandMotionSensor.ino" />
   </ItemGroup>
- 
+  <ItemGroup>
+    <ClInclude Include="__vm\.TempSensorandMotionSensor.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

@@ -1,0 +1,73 @@
+sx/*
+ Name:		TempSensorandMotionSensor.ino
+ Created:	2/1/2018 7:59:19 PM
+ Author:	Jcardif
+*/
+
+//Assigning the analog pins
+const int tempSensor = A1;
+
+//Assigning digital pins
+const int buzzer = 7;
+const int fan = 8;
+const int ledTemp = 10;
+const int ledMotion = 13;
+const int motionSensor = 6;
+
+
+//declare all other variables
+float tempValue;
+int motionValue;
+
+// the setup function runs once when you press reset or power the board
+void setup()
+{
+	pinMode(tempSensor, INPUT);
+	pinMode(buzzer, OUTPUT);
+	pinMode(fan, OUTPUT);
+	pinMode(ledTemp, OUTPUT);
+	pinMode(ledMotion, OUTPUT);
+	pinMode(motionSensor, INPUT);
+
+	Serial.begin(9600);
+	delay(500);
+}
+
+// the loop function runs over and over again until power down or reset
+void loop()
+{
+	tempValue = analogRead(tempSensor);
+	motionValue = digitalRead(motionSensor);
+
+	while (tempValue > 20)
+	{ 	
+		digitalWrite(ledTemp, HIGH);
+		digitalWrite(buzzer, HIGH);
+		delay(50);
+		digitalWrite(ledTemp, LOW);
+		digitalWrite(buzzer, LOW);
+	}
+	if (motionValue == 1)
+	{
+		digitalWrite(ledMotion, HIGH);
+		digitalWrite(fan, HIGH);
+		while (motionValue!=0)
+		{
+			digitalWrite(buzzer, HIGH);
+			delay(100);
+		}		
+	}
+	else if (motionValue == 0)
+	{
+		digitalWrite(ledMotion, LOW);
+		digitalWrite(fan, LOW);
+		while (motionValue == 0)
+		{
+			digitalWrite(buzzer, LOW);
+		}
+	}
+
+	Serial.print(tempValue);
+	Serial.println();
+	delay(1000);
+}
