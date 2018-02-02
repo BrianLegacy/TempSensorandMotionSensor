@@ -94,14 +94,15 @@ void loop()
 		delay(1500);
 		lcd.clear();
 	}
-	/*Serial.print("in DegreeC=");
+
+	Serial.print("in DegreeC=");
 	Serial.print("\t");
 	Serial.print(tempValue);
 	Serial.println();
 	delay(1000);
 
-	Serial.print(motion);
+	Serial.print(motionValue);
 	Serial.println();
 	delay(1000); //Delay of 1 second for ease of viewing
-	*/
+	
 }
